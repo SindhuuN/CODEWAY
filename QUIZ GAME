@@ -1,0 +1,81 @@
+import random
+
+def display_welcome_message():
+    print("Welcome to the Quiz Game!")
+    print("Rules:")
+    print("1. Attempt Every Question.")
+    print("2. For each correct answer, you will earn a point.")
+    print("3. There are different types of questions. For MCQs, select a/b/c/d.\n")
+
+def display_question(question):
+    print(question["question"])
+    if "options" in question:
+        for option in question["options"]:
+            print(option)
+    print()
+
+def check_answer(question, user_answer):
+    if "options" in question:
+        return user_answer.upper() == question["answer"].upper()
+    else:
+        return user_answer.lower() == question["answer"].lower()
+
+def run_quiz(questions):
+    display_welcome_message()
+    random.shuffle(questions)
+    score = 0
+    for question in questions:
+        display_question(question)
+        user_answer = input("Your answer: ")
+        if check_answer(question, user_answer):
+            print("Correct! You earned a point.\n")
+            score += 1
+        else:
+            print("Incorrect. The correct answer is:", question.get("answer", ""))
+            print()
+    print("Quiz completed! Your final score is:", score)
+
+def play_again():
+    while True:
+        choice = input("Do you want to play again? (yes/no): ").lower()
+        if choice == "yes":
+            return True
+        elif choice == "no":
+            return False
+        else:
+            print("Invalid choice. Please enter 'yes' or 'no'.")
+
+def main():
+    questions = [
+        {
+            "question": "What is the capital of Japan?",
+            "options": ["A. Tokyo", "B. Beijing", "C. Seoul", "D. Bangkok", "A"],
+            "answer": "A"
+        },
+        {
+            "question": "What is the largest ocean in the world?",
+            "options": ["A. Pacific Ocean", "B. Atlantic Ocean", "C. Indian Ocean", "D. Arctic Ocean", "A"],
+            "answer": "A"
+        },
+        {
+            "question": "Who is known as the 'Father of Modern Physics'?",
+            "answer": "Albert Einstein "
+        },
+        {
+            "question": "What is the chemical symbol for water?",
+            "answer": "H2O"
+        },
+        {
+            "question": "What is the capital of India?",
+            "answer": "New Delhi"
+        }
+    ]
+
+    play = True
+    while play:
+        run_quiz(questions)
+        play = play_again()
+    print("Thank you for playing!")
+
+if __name__ == "__main__":
+    main()
