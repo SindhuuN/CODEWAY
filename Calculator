@@ -1,0 +1,40 @@
+def calculator():
+    x = float(input("Enter First number: "))
+    y = float(input("Enter Second number: "))
+    operator = input("Enter Choice of operator (+, -, *, %, /, **): ")
+
+    if operator == '+':
+        print("{} + {} = ".format(x, y))
+        print(x + y)
+    elif operator == '-':
+        print("{} - {} = ".format(x, y))
+        print(x - y)
+    elif operator == '*':
+        print("{} * {} = ".format(x, y))
+        print(x * y)
+    elif operator == '%':
+        print("{} % {} = ".format(x, y))
+        print(x % y)
+    elif operator == '/':
+        if y == 0:
+            print(" Cannot divide by zero!!")
+            calculator()
+            return
+        print("{} / {} = ".format(x, y))
+        print(x / y)
+    elif operator == '**':
+        print("{} ** {} = ".format(x, y))
+        print(x ** y)
+    else:
+        print("Invalid operator.")
+        return
+
+    choice = input("Do you want to perform another calculation? (yes/no): ")
+    if choice.lower() == "yes":
+        calculator()
+    elif choice.lower() == "no":
+        print("Thank you for using the calculator.")
+    else:
+        print("Invalid choice. Exiting...")
+
+calculator()
